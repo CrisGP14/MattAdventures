@@ -1,41 +1,101 @@
-# Matt Adventures (versión actualizada)
+# MattAdventures
 
-Juego educativo de matemáticas para Android (Java). Esta versión es el proyecto original de 2016,
-migrado para compilar y ejecutarse en teléfonos actuales (Android 5.0 a Android 16).
+Aplicación Android desarrollada en Java para ofrecer una experiencia de juego educativa y divertida basada en matemáticas, niveles y retos interactivos.
 
-## Cómo compilarlo
-1. Instala **Android Studio** reciente (Narwhal o más nuevo). Trae el JDK que necesita.
-2. `File > Open` y elige esta carpeta. Espera a que termine el *Sync* (descarga Gradle 8.13 y el plugin 8.13.0).
-   Si Studio pide instalar "Android SDK Platform 36", acepta.
-3. Conecta el teléfono (depuración USB activada) o crea un emulador y pulsa **Run**.
+## Descripción
+MattAdventures es un proyecto de videojuego educativo para Android que combina lógica, preguntas, progresión por niveles y una interfaz visual atractiva. El objetivo principal es aprender mientras se juega, reforzando conceptos matemáticos a través de actividades y desafíos.
 
-APK por consola: `./gradlew assembleDebug` (en Windows `gradlew.bat assembleDebug`).
-El APK queda en `app/build/outputs/apk/debug/`.
+La versión actual del proyecto ha sido adaptada para compilar y ejecutarse en dispositivos modernos de Android, manteniendo la lógica y estructura original del juego, pero ajustando compatibilidad, rendimiento y soporte de versiones recientes del SDK.
 
-## Qué cambió respecto al original
-| Antes | Ahora |
-|---|---|
-| Android Gradle Plugin 3.0 / Gradle 4.1 | AGP 8.13.0 / Gradle 8.13 / JDK 17 |
-| compileSdk 23, targetSdk 23 | compileSdk 36, targetSdk 36 (lo que exige Google Play) |
-| `jcenter()`, `compile`, appcompat, appindexing | `google()` + `mavenCentral()`, `implementation`, **sin dependencias** |
-| Manifest con `package`, sin `exported` | `namespace` en Gradle, `exported` declarado, `supportsRtl=false` |
-| `getActionBar().hide()` (fallo al iniciar) | Se quita; pantalla completa inmersiva con la API actual |
-| `onBackPressed()` (Android 16 ya no lo llama) | `OnBackInvokedCallback` en `BaseActivity` |
-| Hilos moviendo vistas / `Thread.sleep(70)` en la UI | `Handler` en el hilo principal y control de tiempo entre pasos |
-| `AsyncTask` + `ProgressDialog` | Hilo simple + transacción SQLite |
-| SQL con texto concatenado | Parámetros / `ContentValues` |
-| Música WAV (19 MB), nunca liberada | OGG (1.8 MB), pausa/reanuda y se libera sola |
-| Sensor de proximidad contaba "lejos" como "cerca" en muchos teléfonos | Compara con el alcance máximo del sensor |
-| Acelerómetro solo funcionaba en una orientación | Se adapta a la rotación de la pantalla |
-| Pregunta "producto de 3 números es 162" con respuesta 150 | Respuesta correcta: 6 |
+## Características
+- Juego educativo con niveles progresivos
+- Preguntas y retos matemáticos
+- Menú principal, niveles y pantallas de juego
+- Base de datos SQLite para almacenamiento local
+- Uso de recursos multimedia (sonidos e imágenes)
+- Compatibilidad con Android moderno
+- Estructura de proyecto desarrollada en Android Studio
 
-Las pantallas, niveles, preguntas, puntajes y la lógica del juego se conservan.
+## Tecnologías utilizadas
+- Java
+- Android SDK
+- SQLite
+- Gradle
+- Android Studio
 
-## Estructura
-- `BaseActivity`: pantalla completa, botón atrás, medidas de pantalla y música (todas las pantallas la extienden).
-- `MainActivity` splash · `Menu` · `MenuNiveles` · `Tablero` (juego) · `Actividades` (preguntas) ·
-  `CargarDatos` · `ComoJugar` · `Credito`
-- `Bdpreguntas`, `BdUsuarios`, `EPreguntas`: base de datos SQLite.
+## Requisitos
+- Android Studio (versión reciente)
+- JDK 17
+- Android SDK Platform 36
+- Dispositivo físico o emulador Android
+
+## Instalación y ejecución
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/CrisGP14/MattAdventures.git
+   ```
+2. Abre la carpeta en Android Studio.
+3. Espera a que termine la sincronización de Gradle.
+4. Si Android Studio solicita instalar componentes del SDK, aceptalos.
+5. Conecta un dispositivo o inicia un emulador y ejecuta la aplicación.
+
+### Compilar desde consola
+En macOS/Linux:
+```bash
+./gradlew assembleDebug
+```
+
+En Windows:
+```bash
+gradlew.bat assembleDebug
+```
+
+El APK generado quedará en:
+```bash
+app/build/outputs/apk/debug/
+```
+
+## Estructura del proyecto
+```text
+MattAdventures/
+├── app/
+│   ├── src/
+│   ├── build.gradle
+│   └── proguard-rules.pro
+├── gradle/
+├── build.gradle
+├── gradlew
+├── gradlew.bat
+├── settings.gradle
+├── gradle.properties
+├── README.md
+└── local.properties
+```
+
+## Componentes principales
+- `MainActivity`: pantalla inicial / splash
+- `Menu`: menú principal
+- `MenuNiveles`: selección de niveles
+- `Tablero`: lógica principal del juego
+- `Actividades`: pantalla de preguntas y actividades
+- `CargarDatos`: carga inicial de contenido
+- `ComoJugar`: instrucciones
+- `Credito`: créditos del proyecto
+- `BdUsuarios`, `Bdpreguntas`, `EPreguntas`: manejo de la base de datos SQLite
+- `BaseActivity`: base común para pantallas con configuración visual y control de música
+
+## Actualizaciones realizadas
+Se modernizó la aplicación para funcionar con versiones actuales de Android, incluyendo ajustes de Gradle, compatibilidad con SDK modernos, correcciones de comportamiento en nuevas versiones del sistema y mejoras en estabilidad y rendimiento.
 
 ## Créditos de audio
-Música de Kevin MacLeod (incompetech.com), licencia CC BY 3.0: Adventure Meme, Amazing Grace 2011, Ambler, Breakdown.
+La música del proyecto usa contenido de Kevin MacLeod (incompetech.com), bajo licencia CC BY 3.0, incluidos temas como:
+- Adventure Meme
+- Amazing Grace 2011
+- Ambler
+- Breakdown
+
+## Nota
+Este proyecto fue desarrollado con fines educativos y de aprendizaje, especialmente enfocado en programación móvil con Android, lógica de juegos y manejo de interfaces de usuario.
+
+## Licencia
+Este proyecto no incluye una licencia específica en el repositorio. Si deseas usarlo con fines académicos o personales, puedes contactarme para acordar su uso.
