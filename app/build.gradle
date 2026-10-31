@@ -1,0 +1,32 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'cristiangiovannigonzalezplascencia.mattadventures'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "cristiangiovannigonzalezplascencia.mattadventures"
+        minSdk 21
+        targetSdk 36
+        versionCode 6
+        versionName "0.56.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lint {
+        // Que los avisos de lint (dp vs sp, textos fijos, etc.) no bloqueen el build
+        abortOnError false
+    }
+}
+
+dependencies {
+    // Sin dependencias: el juego usa solo la API de Android (android.app.Activity).
+}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ask"
+    android:weightSum="1"
+    android:id="@+id/frmactividad">
+
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Ayuda!!"
+        android:id="@+id/lblayuda"
+        android:layout_weight="0.25"
+        android:textStyle="bold|italic"
+        android:textSize="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_width="600dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@+id/imgayuda"
+        android:layout_toEndOf="@+id/imgayuda" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pregunta"
+        android:id="@+id/imgayuda"
+        android:layout_marginBottom="9dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_height="60dp"
+        android:src="@drawable/mdiez"
+        android:id="@+id/imgmdiez"
+        android:layout_width="60dp"
+        android:layout_marginStart="18dp"
+        android:layout_alignTop="@+id/imgndiez"
+        android:layout_toEndOf="@+id/btnresponder" />
+
+    <ImageView
+        android:layout_height="60dp"
+        android:src="@drawable/nuno"
+        android:id="@+id/imgnuno"
+        android:layout_width="60dp"
+        android:layout_marginEnd="28dp"
+        android:layout_alignTop="@+id/btnresponder"
+        android:layout_toStartOf="@+id/btnresponder"
+        android:layout_marginTop="21dp" />
+
+    <ImageView
+        android:layout_height="60dp"
+        android:id="@+id/imgndiez"
+        android:src="@drawable/ndiez"
+        android:layout_width="60dp"
+        android:layout_alignTop="@+id/imgnuno"
+        android:layout_alignStart="@+id/lblayuda" />
+
+    <ImageView
+        android:layout_height="60dp"
+        android:src="@drawable/mcien"
+        android:id="@+id/imgmcien"
+        android:layout_width="60dp"
+        android:layout_marginStart="52dp"
+        android:layout_alignTop="@+id/imgmdiez"
+        android:layout_toEndOf="@+id/imgmdiez" />
+
+    <Button
+        android:text="Aceptar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnresponder"
+        android:layout_above="@+id/lblrespuesta"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0"
+        android:id="@+id/lblrespuesta"
+        android:layout_weight="0.25"
+        android:textStyle="bold|italic"
+        android:textSize="18dp"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/lblayuda"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Pregunta"
+        android:id="@+id/lblpregunta"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.25"
+        android:textSize="25dp"
+        android:textStyle="bold|italic"
+        android:layout_marginBottom="11dp"
+        android:layout_width="573dp"
+        android:layout_height="125dp"
+        android:layout_above="@+id/imgnuno"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

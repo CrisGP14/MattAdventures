@@ -1,0 +1,4 @@
+// Archivo de build raíz. Las dependencias de la app van en app/build.gradle
+plugins {
+    id 'com.android.application' version '8.13.0' apply false
+}

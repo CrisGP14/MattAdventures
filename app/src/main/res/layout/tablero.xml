@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mundo1"
+    android:id="@+id/frmtablero">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/imgpuertai"
+        android:layout_alignTop="@+id/imgpuerta"
+        android:layout_alignParentStart="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/imgpersonaje"
+        android:src="@drawable/aa"
+        android:layout_above="@+id/imgizq"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textView"
+        android:layout_marginStart="26dp"
+        android:layout_below="@+id/imgnubee3"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:src="@drawable/barriba"
+        android:id="@+id/imgdefensa"
+        android:layout_height="50dp"
+        android:layout_marginBottom="18dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView3" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/imgpuerta"
+        android:src="@drawable/puertas"
+        android:layout_alignTop="@+id/imgpersonaje"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imgder"
+        android:src="@drawable/bderecha"
+        android:layout_marginEnd="28dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imgizq"
+        android:src="@drawable/bizquierda"
+        android:layout_marginEnd="73dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/imgder" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/imgprueba"
+        android:src="@drawable/book"
+        android:layout_alignTop="@+id/imgpuertai"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_height="80dp"
+        android:id="@+id/imgnubee2"
+        android:src="@drawable/nube"
+        android:layout_width="80dp"
+        android:layout_above="@+id/textView"
+        android:layout_toEndOf="@+id/imgpuertai"
+        android:layout_marginBottom="20dp" />
+
+    <ImageView
+        android:layout_height="80dp"
+        android:id="@+id/imgnubee"
+        android:src="@drawable/nube"
+        android:layout_width="80dp"
+        android:layout_marginEnd="83dp"
+        android:layout_above="@+id/textView2"
+        android:layout_toStartOf="@+id/imgizq" />
+
+    <ImageView
+        android:layout_height="80dp"
+        android:id="@+id/imgnubee3"
+        android:src="@drawable/nube"
+        android:layout_width="80dp"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imgnubee"
+        android:layout_marginStart="15dp" />
+
+</RelativeLayout>

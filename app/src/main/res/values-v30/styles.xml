@@ -1,0 +1,6 @@
+<resources>
+    <!-- Android 11+: en horizontal la muesca queda en un borde largo, hay que usar "always" -->
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="android:windowLayoutInDisplayCutoutMode">always</item>
+    </style>
+</resources>

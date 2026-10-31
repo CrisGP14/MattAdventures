@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/ask">
+
+    <TextView
+        android:id="@+id/lblcreditos"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.25"
+        android:textSize="25dp"
+        android:textStyle="bold|italic"
+        android:layout_width="573dp"
+        android:layout_height="125dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/aa"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/lblcreditos"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="44dp"
+        android:id="@+id/imageView" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pregunta"
+        android:id="@+id/imageView2"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_alignEnd="@+id/lblcreditos" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:src="@drawable/barriba"
+        android:id="@+id/imgavanzar"
+        android:layout_height="80dp"
+        android:layout_marginBottom="31dp"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
