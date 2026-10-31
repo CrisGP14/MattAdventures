@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Tema base: Material del sistema, sin barra de acción (no necesita AppCompat). -->
+    <style name="Base.AppTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <!-- Fondo negro para que no haya destello blanco entre pantallas -->
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme" parent="Base.AppTheme" />
+
+</resources>

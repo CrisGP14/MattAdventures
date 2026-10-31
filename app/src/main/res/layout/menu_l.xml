@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:id="@+id/fondo"
+    android:background="@drawable/mundo1">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:id="@+id/imgnubes1"
+        android:layout_weight="0.19"
+        android:src="@drawable/nube"
+        android:layout_marginStart="58dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:id="@+id/imgnubes4"
+        android:layout_weight="0.19"
+        android:src="@drawable/nube"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="65dp" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:id="@+id/imgnube3"
+        android:layout_weight="0.19"
+        android:src="@drawable/nube"
+        android:layout_alignBottom="@+id/imgnubes4"
+        android:layout_toStartOf="@+id/imgnubes4"
+        android:layout_marginEnd="82dp" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:id="@+id/imgnube2"
+        android:layout_weight="0.19"
+        android:src="@drawable/nube"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imgnubes1"
+        android:layout_marginStart="34dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hoja"
+        android:id="@+id/imghoja4"
+        android:layout_alignBottom="@+id/imgnube2"
+        android:layout_toEndOf="@+id/imgnubes1"
+        android:layout_marginStart="21dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hoja"
+        android:id="@+id/imghoja1"
+        android:layout_below="@+id/imghoja6"
+        android:layout_alignStart="@+id/imgnubes1" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hoja"
+        android:id="@+id/imghoja5"
+        android:layout_below="@+id/lbluno"
+        android:layout_alignStart="@+id/lbluno" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hoja"
+        android:id="@+id/imghoja6"
+        android:layout_below="@+id/imgnube2"
+        android:layout_toEndOf="@+id/lbluno"
+        android:layout_marginTop="19dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hoja"
+        android:id="@+id/imghoja3"
+        android:layout_marginEnd="47dp"
+        android:layout_alignBottom="@+id/lbluno"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="7dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salir"
+        android:id="@+id/lblsalir"
+        android:textSize="20dp"
+        android:fontFamily="serif"
+        android:textStyle="normal|bold|italic"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Como Jugar"
+        android:id="@+id/lblhowto"
+        android:textSize="20dp"
+        android:fontFamily="serif"
+        android:textStyle="normal|bold|italic"
+        android:layout_above="@+id/lblsalir"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Iniciar Partida"
+        android:id="@+id/lbluno"
+        android:textSize="20dp"
+        android:fontFamily="serif"
+        android:textStyle="normal|bold|italic"
+        android:layout_below="@+id/imghoja1"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Niveles"
+        android:id="@+id/lblnivel"
+        android:textSize="20dp"
+        android:fontFamily="serif"
+        android:textStyle="normal|bold|italic"
+        android:layout_below="@+id/lbluno"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registrar Usuario"
+        android:textSize="20dp"
+        android:fontFamily="serif"
+        android:textStyle="normal|bold|italic"
+        android:id="@+id/lblusuarios"
+        android:layout_below="@+id/lblnivel"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hoja"
+        android:id="@+id/imghoja2"
+        android:layout_alignTop="@+id/lblusuarios"
+        android:layout_toStartOf="@+id/imgnubes4" />
+
+</RelativeLayout>

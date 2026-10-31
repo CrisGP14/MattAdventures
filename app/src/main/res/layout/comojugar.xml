@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/frmvideo"
+    android:background="@drawable/ask">
+
+    <TextView
+        android:text="Presiona para cambiar la imagen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/txttap"
+        android:layout_below="@+id/imghow"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Regresar"
+        android:layout_width="170dp"
+        android:id="@+id/btnback"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_height="40dp" />
+
+    <VideoView
+        android:id="@+id/videohow"
+        android:layout_alignTop="@+id/txttap"
+        android:layout_centerHorizontal="true"
+        android:layout_height="250dp"
+        android:layout_width="575dp" />
+
+    <TextView
+        android:text="Presiona la pantalla para ver las opciones del video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnback"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView4" />
+
+</RelativeLayout>

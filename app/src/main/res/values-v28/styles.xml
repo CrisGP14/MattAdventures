@@ -1,0 +1,6 @@
+<resources>
+    <!-- Android 9-10: dibujar también bajo la muesca (notch) de la cámara -->
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
+</resources>
