@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/** Carga las preguntas en la base de datos la primera vez que se juega y pasa a la pantalla de preguntas. */
+/** Carga las preguntas en la base de datos la primera vez que se juega y abre el juego. */
 public class CargarDatos extends BaseActivity {
 
     @Override
@@ -22,7 +22,7 @@ public class CargarDatos extends BaseActivity {
 
         if (yaCargadas)
         {
-            abrirPreguntas();
+            abrirJuego();
         }
         else
         {
@@ -38,7 +38,7 @@ public class CargarDatos extends BaseActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (!isFinishing()) abrirPreguntas();
+                            if (!isFinishing()) abrirJuego();
                         }
                     });
                 }
@@ -46,9 +46,9 @@ public class CargarDatos extends BaseActivity {
         }
     }
 
-    private void abrirPreguntas()
+    private void abrirJuego()
     {
-        startActivity(new Intent(CargarDatos.this, Actividades.class));
+        startActivity(new Intent(CargarDatos.this, Tablero.class));
         finish();
     }
 

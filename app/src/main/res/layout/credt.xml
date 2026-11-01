@@ -1,45 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/ask">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/lblcreditos"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.25"
-        android:textSize="25dp"
-        android:textStyle="bold|italic"
-        android:layout_width="573dp"
-        android:layout_height="125dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+    <cristiangiovannigonzalezplascencia.mattadventures.FondoMenuView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/aa"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/lblcreditos"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="44dp"
-        android:id="@+id/imageView" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/pregunta"
-        android:id="@+id/imageView2"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_alignEnd="@+id/lblcreditos" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="60dp"
-        android:src="@drawable/barriba"
-        android:id="@+id/imgavanzar"
-        android:layout_height="80dp"
-        android:layout_marginBottom="31dp"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="56dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/fondo_panel"
+                android:orientation="vertical"
+                android:paddingStart="22dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="22dp"
+                android:paddingBottom="14dp">
+
+                <TextView
+                    android:id="@+id/lblpagina"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Créditos"
+                    android:textColor="#B5541C"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lblcreditos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:minLines="4"
+                    android:textColor="#3B1D08"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnsiguiente"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/boton_opcion"
+                        android:stateListAnimator="@null"
+                        android:text="Siguiente"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnmenu"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/boton_neutro"
+                        android:stateListAnimator="@null"
+                        android:text="Menú"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
