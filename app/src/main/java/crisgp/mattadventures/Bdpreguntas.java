@@ -13,7 +13,7 @@ public class Bdpreguntas extends SQLiteOpenHelper
 {
 
     private static final String BD_Nombre = "Problemas";
-    private static  final int VERSION = 1;
+    private static  final int VERSION = 2;
     private SQLiteDatabase db;
 
     public Bdpreguntas(Context context)
@@ -87,6 +87,15 @@ public class Bdpreguntas extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-
+        if (oldVersion < 2)
+        {
+            // La pregunta del producto 162 tenia la respuesta 150; la correcta es 6 (162 / (9 x 3))
+            ContentValues v = new ContentValues();
+            v.put(EPreguntas.CAMPO_Respuesta, "6");
+            v.put(EPreguntas.CAMPO_Ayuda, "Multiplica los dos numeros que ya tienes (9 x 3) y divide 162 entre ese resultado");
+            db.update(EPreguntas.TABLE_NAME, v,
+                    EPreguntas.CAMPO_Pregunta + " LIKE ? AND " + EPreguntas.CAMPO_Respuesta + " = ?",
+                    new String[]{"El producto de 3 numeros es 162%", "150"});
+        }
     }
 }
