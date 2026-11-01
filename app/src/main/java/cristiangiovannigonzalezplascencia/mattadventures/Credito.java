@@ -2,52 +2,51 @@ package cristiangiovannigonzalezplascencia.mattadventures;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class Credito extends BaseActivity implements OnTouchListener
+public class Credito extends BaseActivity
 {
-    private int i=1;
-    private ImageView imgavanzar;
-    private TextView lblcreditos;
-    private String a,b,c;
+    private int i=0;
+    private TextView lblcreditos, lblpagina;
+    private String[] paginas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.credt);
 
-        imgavanzar = (ImageView)findViewById(R.id.imgavanzar);
         lblcreditos = (TextView)findViewById(R.id.lblcreditos);
+        lblpagina = (TextView)findViewById(R.id.lblpagina);
+        Button btnsiguiente = (Button)findViewById(R.id.btnsiguiente);
+        Button btnmenu = (Button)findViewById(R.id.btnmenu);
 
-        a = "Hola!! gracias por haber jugado este videojuego, fue completamente desarrollado por Cristian Giovanni Gonzalez Plascencia, la programacion como el diseño del personaje y de todos los escenarios.";
-        b ="Tambien agradecer a algunas personas que me ayudaron con algunos detalles en el videojuego, Fernanda Isabel Escamilla Luna, Cynthia Trinidad Cardona Dávila y Vanessa Sinahi Juarez Gracia";
-        c = "Musica Adventure Meme Kevin MacLeod (incompetech.com), Amazing Grace 2011 Kevin MacLeod (incompetech.com), Ambler Kevin MacLeod (incompetech.com), Breakdown Kevin MacLeod (incompetech.com)";
+        paginas = new String[] {
+            "¡Hola! Gracias por haber jugado este videojuego. Fue desarrollado por crisgp14 (GitHub), tanto la programación como el diseño del personaje y de todos los escenarios.",
+            "Música y efectos de sonido: composiciones originales creadas para este videojuego, en estilo chiptune."
+        };
 
-        iniciarMusica(R.raw.starrynight);
+        iniciarMusica(R.raw.musica_menu);
+        mostrar();
 
-        lblcreditos.setText(a);
-        imgavanzar.setOnTouchListener(this);
-
+        btnsiguiente.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                i = (i + 1) % paginas.length;
+                mostrar();
+            }
+        });
+        btnmenu.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                alAtras();
+            }
+        });
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent evento)
+    private void mostrar()
     {
-        if (evento.getAction() == MotionEvent.ACTION_DOWN)
-        {
-            if (v.getId() == R.id.imgavanzar)
-            {
-                i++;
-                if(i==1) lblcreditos.setText(a);
-                else if(i==2) lblcreditos.setText(b);
-                else if(i==3) lblcreditos.setText(c);
-                else if(i==4) {i=1;lblcreditos.setText(a);}
-            }
-        }
-        return true;
+        lblcreditos.setText(paginas[i]);
+        lblpagina.setText("Créditos  " + (i + 1) + "/" + paginas.length);
     }
 
     @Override

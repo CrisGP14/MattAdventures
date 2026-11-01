@@ -1,122 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frmtablero"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mundo1"
-    android:id="@+id/frmtablero">
+    android:background="#000000">
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/imgpuertai"
-        android:layout_alignTop="@+id/imgpuerta"
-        android:layout_alignParentStart="false" />
+    <!-- El juego: corredor automático, se salta tocando en cualquier parte -->
+    <cristiangiovannigonzalezplascencia.mattadventures.JuegoView
+        android:id="@+id/juego"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+    <!-- Panel de pregunta (aparece al chocar con un libro) -->
+    <FrameLayout
+        android:id="@+id/panelPregunta"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
+        <LinearLayout
+            android:id="@+id/tarjetaPregunta"
+            android:layout_width="620dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/fondo_panel"
+            android:orientation="vertical"
+            android:paddingStart="22dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="22dp"
+            android:paddingBottom="14dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="¡Chocaste! Resuelve para seguir"
+                android:textColor="#B5541C"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/imgpersonaje"
-        android:src="@drawable/aa"
-        android:layout_above="@+id/imgizq"
-        />
+            <TextView
+                android:id="@+id/lblpregunta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:minLines="2"
+                android:text="Pregunta"
+                android:textColor="#3B1D08"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/textView"
-        android:layout_marginStart="26dp"
-        android:layout_below="@+id/imgnubee3"
-        android:layout_alignParentStart="true" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:src="@drawable/barriba"
-        android:id="@+id/imgdefensa"
-        android:layout_height="50dp"
-        android:layout_marginBottom="18dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView3" />
+                <Button
+                    android:id="@+id/btnopcion1"
+                    android:layout_width="0dp"
+                    android:layout_height="58dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/boton_opcion"
+                    android:stateListAnimator="@null"
+                    android:text="0"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/imgpuerta"
-        android:src="@drawable/puertas"
-        android:layout_alignTop="@+id/imgpersonaje"
-        android:layout_alignParentStart="true" />
+                <Button
+                    android:id="@+id/btnopcion2"
+                    android:layout_width="0dp"
+                    android:layout_height="58dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/boton_opcion"
+                    android:stateListAnimator="@null"
+                    android:text="0"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/imgder"
-        android:src="@drawable/bderecha"
-        android:layout_marginEnd="28dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+                <Button
+                    android:id="@+id/btnopcion3"
+                    android:layout_width="0dp"
+                    android:layout_height="58dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/boton_opcion"
+                    android:stateListAnimator="@null"
+                    android:text="0"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/imgizq"
-        android:src="@drawable/bizquierda"
-        android:layout_marginEnd="73dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/imgder" />
+            <TextView
+                android:id="@+id/lblresultado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:minHeight="26dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/imgprueba"
-        android:src="@drawable/book"
-        android:layout_alignTop="@+id/imgpuertai"
-        android:layout_alignParentStart="true" />
+            <TextView
+                android:id="@+id/lblayuda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:minHeight="22dp"
+                android:textColor="#5A4636"
+                android:textSize="15sp"
+                android:textStyle="italic" />
 
-    <ImageView
-        android:layout_height="80dp"
-        android:id="@+id/imgnubee2"
-        android:src="@drawable/nube"
-        android:layout_width="80dp"
-        android:layout_above="@+id/textView"
-        android:layout_toEndOf="@+id/imgpuertai"
-        android:layout_marginBottom="20dp" />
+            <Button
+                android:id="@+id/btnpista"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/boton_neutro"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:stateListAnimator="@null"
+                android:text="Ver pista"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
 
-    <ImageView
-        android:layout_height="80dp"
-        android:id="@+id/imgnubee"
-        android:src="@drawable/nube"
-        android:layout_width="80dp"
-        android:layout_marginEnd="83dp"
-        android:layout_above="@+id/textView2"
-        android:layout_toStartOf="@+id/imgizq" />
+    <!-- Panel de mensaje: pausa y fin de la partida -->
+    <FrameLayout
+        android:id="@+id/panelMensaje"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
 
-    <ImageView
-        android:layout_height="80dp"
-        android:id="@+id/imgnubee3"
-        android:src="@drawable/nube"
-        android:layout_width="80dp"
-        android:layout_marginTop="14dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/imgnubee"
-        android:layout_marginStart="15dp" />
+        <LinearLayout
+            android:id="@+id/tarjetaMensaje"
+            android:layout_width="460dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/fondo_panel"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="16dp">
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/lbltitmsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Pausa"
+                android:textColor="#3B1D08"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lbldetmsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:lineSpacingExtra="3dp"
+                android:text="Puntos: 0"
+                android:textColor="#3B1D08"
+                android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/btnmsg1"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/boton_opcion"
+                android:stateListAnimator="@null"
+                android:text="Continuar"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnmsg2"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/boton_neutro"
+                android:stateListAnimator="@null"
+                android:text="Menú"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

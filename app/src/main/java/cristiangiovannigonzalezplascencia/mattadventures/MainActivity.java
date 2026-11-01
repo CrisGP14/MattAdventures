@@ -1,25 +1,60 @@
 package cristiangiovannigonzalezplascencia.mattadventures;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-/** Splash animado: el personaje avanza mientras carga la barra de progreso. */
+import java.util.Random;
+
+/**
+ * Splash: es el propio juego en modo demostración. Matt corre y salta los libros solo,
+ * amanece mientras carga la barra, y el logo entra con rebote.
+ */
 public class MainActivity extends BaseActivity
 {
-    private ImageView imgper;
+    private static final int DURACION_MS = 4500;
+    private static final String[] CONSEJOS = {
+            "Toca la pantalla para saltar los libros",
+            "Cada 30 segundos el juego se acelera",
+            "Acierta las preguntas para seguir corriendo",
+            "Esquiva libros para ganar más puntos",
+            "La pista cuesta 15 puntos: úsala con cuidado"
+    };
+
+    private JuegoView juego;
     private ProgressBar pbprogres;
-    private RelativeLayout frmsplash;
-    private CountDownTimer timer;
-    public static int seg=5,mili=seg*1000;
-    private int x=4;
+    private ImageView logo;
+    private TextView lblcargando, lblconsejo;
+
+    private ValueAnimator progresoAnim;
+    private ObjectAnimator flotarAnim;
+    private boolean cancelado = false;
+    private int puntos = 0;
+
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private final Runnable puntitos = new Runnable() {
+        @Override
+        public void run() {
+            puntos = (puntos + 1) % 4;
+            StringBuilder sb = new StringBuilder("Cargando");
+            for (int i = 0; i < puntos; i++) sb.append('.');
+            lblcargando.setText(sb.toString());
+            handler.postDelayed(this, 350);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,9 +65,11 @@ public class MainActivity extends BaseActivity
         // Crea la base de preguntas (vacía) si no existía
         new Bdpreguntas(this);
 
-        pbprogres = (ProgressBar)findViewById(R.id.pbprogres);
-        frmsplash = (RelativeLayout)findViewById(R.id.frmprincipal);
-        imgper = (ImageView)findViewById(R.id.imgper);
+        juego = (JuegoView) findViewById(R.id.juegosplash);
+        pbprogres = (ProgressBar) findViewById(R.id.pbprogres);
+        logo = (ImageView) findViewById(R.id.imgsplashlogo);
+        lblcargando = (TextView) findViewById(R.id.lblcargando);
+        lblconsejo = (TextView) findViewById(R.id.lblconsejo);
 
         // Usuario por defecto: solo se crea si la tabla está vacía
         BdUsuarios bd_usu = new BdUsuarios(this, "Usuarios", null, 1);
@@ -47,8 +84,11 @@ public class MainActivity extends BaseActivity
                     " VALUES (null,' Ingre Usuario','0','0','0')");
         }
 
-        pbprogres.setProgressTintList(ColorStateList.valueOf(Color.CYAN));
-        pbprogres.setMax(maximo());
+        juego.setMotor(new MotorJuego());
+        juego.setDemo(true);
+        juego.setHoraManual(2f);                      // empieza de noche y amanece al cargar
+
+        lblconsejo.setText(CONSEJOS[new Random().nextInt(CONSEJOS.length)]);
     }
 
     @Override
@@ -63,61 +103,70 @@ public class MainActivity extends BaseActivity
     {
         // Si la app pasa a segundo plano no se debe abrir el menú desde ahí
         // (Android lo bloquea y el juego se cerraría solo): se cancela y se reinicia al volver.
-        if (timer != null) timer.cancel();
+        cancelado = true;
+        if (progresoAnim != null) progresoAnim.cancel();
+        if (flotarAnim != null) flotarAnim.cancel();
+        handler.removeCallbacks(puntitos);
         super.onPause();
     }
 
-    public void iniciar ()
+    private void iniciar()
     {
-        if (timer != null) timer.cancel();
-        x = 4;
+        cancelado = false;
         pbprogres.setProgress(0);
-        timer = new CountDownTimer(mili,500)
-        {
+        handler.removeCallbacks(puntitos);
+        handler.post(puntitos);
 
+        // Entrada del logo: cae con rebote y luego flota suavemente
+        float d = getResources().getDisplayMetrics().density;
+        logo.setAlpha(0f);
+        logo.setScaleX(0.6f);
+        logo.setScaleY(0.6f);
+        logo.setTranslationY(-60f * d);
+        logo.animate().alpha(1f).scaleX(1f).scaleY(1f).translationY(0f)
+                .setDuration(650).setInterpolator(new OvershootInterpolator(1.6f))
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (cancelado) return;
+                        float dd = getResources().getDisplayMetrics().density;
+                        flotarAnim = ObjectAnimator.ofFloat(logo, "translationY", 0f, -5f * dd);
+                        flotarAnim.setDuration(900);
+                        flotarAnim.setRepeatCount(ValueAnimator.INFINITE);
+                        flotarAnim.setRepeatMode(ValueAnimator.REVERSE);
+                        flotarAnim.setInterpolator(new android.view.animation.AccelerateDecelerateInterpolator());
+                        flotarAnim.start();
+                    }
+                }).start();
+
+        // Carga: avanza la barra y amanece
+        progresoAnim = ValueAnimator.ofFloat(0f, 1f);
+        progresoAnim.setDuration(DURACION_MS);
+        progresoAnim.setInterpolator(new LinearInterpolator());
+        progresoAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onTick(long millisUntilFinished)
-            {
-                pbprogres.setProgress(progreso(millisUntilFinished));
-                x--;
-                switch (x)
-                {
-                    case 4:
-                        imgper.setImageResource(R.drawable.ca);
-                        frmsplash.setBackgroundResource(R.drawable.mundo3);
-                        break;
-                    case 3:
-                        imgper.setImageResource(R.drawable.ba);
-                        frmsplash.setBackgroundResource(R.drawable.mundo1);
-                        break;
-                    case 2:
-                        imgper.setImageResource(R.drawable.ca);
-                        frmsplash.setBackgroundResource(R.drawable.mundo2);
-                        break;
-                    case 1:
-                        imgper.setImageResource(R.drawable.ba);
-                        x=5;
-                        break;
-                }
+            public void onAnimationUpdate(ValueAnimator a) {
+                float v = (Float) a.getAnimatedValue();
+                float suave = new DecelerateInterpolator(1.2f).getInterpolation(v);
+                pbprogres.setProgress((int) (suave * 1000));
+                juego.setHoraManual(2f * (1f - v));   // noche -> atardecer -> día
             }
-
+        });
+        progresoAnim.addListener(new AnimatorListenerAdapter() {
             @Override
-            public void onFinish()
-            {
-                startActivity(new Intent(MainActivity.this,Menu.class));
+            public void onAnimationEnd(Animator animation) {
+                if (cancelado) return;
+                startActivity(new Intent(MainActivity.this, Menu.class));
                 finish();
             }
-        }.start();
-
+        });
+        progresoAnim.start();
     }
 
-    public int progreso(long miliseg)
+    @Override
+    protected void onDestroy()
     {
-        return (int) ((mili-miliseg)/1000);
-    }
-
-    public int maximo()
-    {
-        return seg-2;
+        handler.removeCallbacksAndMessages(null);
+        super.onDestroy();
     }
 }

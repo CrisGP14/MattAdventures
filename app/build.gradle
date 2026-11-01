@@ -7,7 +7,7 @@ android {
     compileSdk 36
 
     defaultConfig {
-        applicationId "cristiangiovannigonzalezplascencia.mattadventures"
+        applicationId "io.github.crisgp14.mattadventures"
         minSdk 21
         targetSdk 36
         versionCode 6
