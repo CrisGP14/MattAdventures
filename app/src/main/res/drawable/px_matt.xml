@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Muestra la imagen pixel art SIN suavizarla al agrandarla o reducirla -->
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/da"
+    android:filter="false"
+    android:gravity="fill" />
