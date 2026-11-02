@@ -39,7 +39,7 @@ El proyecto no tiene dependencias externas ni pide permisos.
   total de respuestas correctas.
 
 ## Arquitectura
-Código en `app/src/main/java/cristiangiovannigonzalezplascencia/mattadventures/` (`namespace` del módulo). El identificador de la app instalada (`applicationId`) es `io.github.crisgp14.mattadventures`.
+Código en `app/src/main/java/crisgp/mattadventures/` (`namespace` del módulo). El identificador de la app instalada (`applicationId`) es `io.github.crisgp14.mattadventures`.
 
 | Clase | Responsabilidad |
 |---|---|
