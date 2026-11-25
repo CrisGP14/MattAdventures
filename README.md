@@ -1,114 +1,131 @@
 # Matt Adventures
 
-Juego educativo de matemáticas para Android. Matt corre automáticamente por un escenario en pixel art y el
-jugador toca la pantalla para saltar los libros que aparecen en el camino. Si choca con uno, el juego se detiene y
-plantea una pregunta de matemáticas con tres opciones: acertar permite continuar y fallar cuesta un corazón.
+An educational math game for Android. Matt runs automatically through a pixel-art world, and the player taps the screen to jump over the books in his way. Hitting one pauses the game and asks a math question with three options: a correct answer lets Matt continue, and a wrong one costs a heart.
 
-Autor: [crisgp14](https://github.com/crisgp14)
+The game and its questions are in Spanish. It has no external dependencies and requests no permissions.
 
-## Capturas
-| Menú principal | Splash (el juego en modo demostración) |
+Created by [CrisGP14](https://github.com/CrisGP14).
+
+## Screenshots
+
+| Main menu | Splash screen (game in demo mode) |
 |---|---|
-| ![Menú principal de Matt Adventures](docs/capturas/menu.jpg) | ![Pantalla de carga con Matt corriendo entre pinos](docs/capturas/splash.jpg) |
+| ![Matt Adventures main menu](docs/capturas/menu.jpg) | ![Splash screen with Matt running among pine trees](docs/capturas/splash.jpg) |
 
-## Tecnologías
-| Área | Uso |
+## Gameplay
+
+- **One-tap control:** Matt runs on his own; tap to jump.
+- **Obstacles:** single books, pairs, and towers of 4 or 6 books, placed at random with gaps that can always be cleared.
+- **Speed:** increases at 30, 60 and 90 seconds. The first two increases also change the scenery and music, from day to sunset and then night.
+- **Questions:** 30 math questions that do not repeat until all have been used. Each has an optional hint that costs 15 points.
+- **Lives:** four hearts. A correct answer gives 1.8 seconds of invulnerability; losing every heart ends the run.
+- **Score:** meters run, plus 10 points for each obstacle cleared.
+- **Records:** best score, best streak of cleared obstacles, and total correct answers.
+
+## Tech stack
+
+| Area | Technology |
 |---|---|
-| Lenguaje | Java 17 |
-| Plataforma | Android (`minSdk 21`, `targetSdk` y `compileSdk 36`), solo orientación horizontal |
-| Build | Gradle 8.13, Android Gradle Plugin 8.13.0 |
-| Gráficos | `View` personalizada con `Canvas`, `BitmapShader` para las capas del escenario y animaciones de la API estándar |
-| Audio | `MediaPlayer` (música) y `SoundPool` (efectos de sonido); toda la música y los efectos se sintetizan por código |
-| Datos | SQLite (`SQLiteOpenHelper`) para las preguntas y los récords del jugador |
-| Arte y audio | Pixel art y música generados con scripts de Python (Pillow, NumPy, SciPy, ffmpeg) |
-| Pruebas | Simulaciones del motor y de las preguntas con Java puro (JDK, sin Android) |
+| Language | Java |
+| Platform | Android 5.0+ (`minSdk 21`, `targetSdk` and `compileSdk 36`), landscape only |
+| Build | Gradle 8.13, Android Gradle Plugin 8.13.0, JDK 17+ |
+| Graphics | Custom `View` with `Canvas`, and `BitmapShader` for the scenery layers |
+| Audio | `MediaPlayer` for music and `SoundPool` for sound effects |
+| Storage | SQLite for questions and player records |
+| Art and audio tools | Python (Pillow, NumPy, SciPy) and ffmpeg |
+| Tests | Plain Java simulations that run without Android |
 
-El proyecto no tiene dependencias externas ni pide permisos.
+## Build and run
 
-## Sistema de juego
-- **Control:** un solo botón de salto. El personaje corre de forma automática.
-- **Obstáculos:** libros sueltos, pares y torres de 4 o 6 libros; generados al azar con separaciones siempre saltables.
-- **Velocidad:** sube a los 30, 60 y 90 segundos (tres subidas como máximo). Con cada subida el escenario pasa de día
-  a atardecer y a noche, y cambia la música.
-- **Preguntas:** 30 preguntas de matemáticas que no se repiten hasta agotarlas. Cada una tiene tres opciones y una
-  pista con la explicación del tema (cuesta puntos).
-- **Vidas:** cuatro corazones. Al acertar hay 1.8 s de invulnerabilidad; al fallar se pierde un corazón; con cero termina
-  la partida.
-- **Puntos:** metros recorridos más 10 por cada libro esquivado; la pista cuesta 15.
-- **Récords** (guardados en SQLite, visibles en "Puntajes"): mejor puntaje, mejor racha de libros esquivados y
-  total de respuestas correctas.
+1. Open the project folder in Android Studio (**File > Open**) and wait for the Gradle sync.
+2. Press **Run** to launch it on a device or emulator, or build the APK from a terminal:
 
-## Arquitectura
-Código en `app/src/main/java/crisgp/mattadventures/` (`namespace` del módulo). El identificador de la app instalada (`applicationId`) es `io.github.crisgp14.mattadventures`.
-
-| Clase | Responsabilidad |
-|---|---|
-| `MotorJuego` | Lógica pura del juego: física, obstáculos, vidas y puntos. Trabaja en dp y segundos con un paso fijo de 1/120 s. No depende de Android. |
-| `JuegoView` | Dibuja la partida, recibe el toque y tiene un modo demostración que usa el splash. |
-| `Escenario` | Escenario de capas con parallax (cielo, estrellas, luna, nubes, árboles lejanos y cercanos, arbusto y piso) en versión día, atardecer y noche. |
-| `Tablero` | Actividad de la partida: panel de preguntas, pausa, fin de juego, sonidos y guardado de récords. |
-| `BolsaPreguntas`, `PreguntaJuego` | Reparto de preguntas sin repetir y armado de opciones. |
-| `Bdpreguntas`, `BdUsuarios`, `EPreguntas` | Acceso a SQLite: preguntas y usuario con sus récords. |
-| `MainActivity` | Splash: el propio juego en modo demostración mientras carga. |
-| `Menu`, `CargarDatos`, `ComoJugar`, `Credito`, `FondoMenuView` | Menú principal, carga de datos, instrucciones y créditos. |
-| `BaseActivity` | Pantalla completa, botón atrás (Android 16), medidas de pantalla y música. |
-
-La dificultad se ajusta en la sección **AJUSTES** de `MotorJuego`: `VELOCIDADES`, `SEGUNDOS_POR_NIVEL`,
-`VELOCIDAD_SALTO`, `GRAVEDAD`, `GAP_*`, `TIPOS`, `PESOS`, `VIDAS_INICIALES`, `SEGUNDOS_INVULNERABLE`,
-`PUNTOS_POR_ESQUIVE` y `COSTO_PISTA`.
-
-## Estructura del repositorio
-```
-app/                      módulo Android (código, recursos, manifiesto)
-  src/main/java/...       clases del juego
-  src/main/res/           layouts, drawables, sonidos (raw), iconos y valores
-herramientas/             scripts de Python que generan el arte
-  fuentes/                imagen base del logo
-docs/capturas/            capturas de pantalla para el README
-pruebas/                  pruebas de simulación (Java puro)
-correr_pruebas.sh         compila y ejecuta las pruebas
-```
-
-## Compilar y ejecutar
-1. Abrir la carpeta del proyecto con Android Studio (`File > Open`) y esperar el sync de Gradle.
-2. Ejecutar en un dispositivo o emulador con **Run**, o generar el APK:
-   ```
+   ```bash
    ./gradlew assembleDebug        # Windows: gradlew.bat assembleDebug
    ```
-   El APK queda en `app/build/outputs/apk/debug/`.
 
-## Pruebas
-```
+   The APK is written to `app/build/outputs/apk/debug/`.
+
+## Tests
+
+```bash
 sh correr_pruebas.sh
 ```
-Requiere un JDK. Simula el motor del juego (subidas de velocidad, que cada obstáculo sea saltable en todas las
-velocidades, huecos entre obstáculos y reglas de vidas), el reparto de preguntas y la demostración del splash.
 
-## Arte
-Todo el arte del escenario es pixel art (1 píxel de arte = 1 dp, dibujado sin suavizado) y se genera con scripts.
-Requieren `pip install pillow numpy scipy`.
+This needs only a JDK. The tests simulate the game engine (speed increases, gaps, lives, and whether every obstacle can be cleared at every speed), the question system and the splash demo.
 
-| Script | Genera |
+## Architecture
+
+The code is in `app/src/main/java/crisgp/mattadventures/` (the module `namespace`). The installed app ID is `io.github.crisgp14.mattadventures`.
+
+| Class | Responsibility |
 |---|---|
-| `herramientas/gen_pixel.py` | cielo, luna, nubes, árboles, arbustos, libros y corazones |
-| `herramientas/gen_piso.py` | pasto y tierra (3 paletas) |
-| `herramientas/gen_logo.py` | logo con letras rellenas, a partir de `herramientas/fuentes/ml_original.png` |
-| `herramientas/gen_icono.py` | icono adaptativo (fondo, primer plano y monocromo) e iconos clásicos |
+| `MotorJuego` | Pure game logic: physics, obstacles, lives and score. Independent of Android; runs at a fixed 1/120 s step using dp and seconds |
+| `JuegoView` | Draws the game, handles touch input and provides the demo mode |
+| `Escenario` | Parallax scenery with day, sunset and night versions |
+| `Tablero` | Game screen: questions, pause, game over, sounds and saving records |
+| `BolsaPreguntas`, `PreguntaJuego` | Question selection without repeats, and answer options |
+| `Bdpreguntas`, `BdUsuarios`, `EPreguntas` | SQLite access for questions, player and records |
+| `MainActivity` | Splash screen, with the game running in demo mode |
+| `Menu`, `CargarDatos`, `ComoJugar`, `Credito`, `FondoMenuView` | Main menu, data loading, instructions and credits |
+| `BaseActivity` | Full screen, back button, screen measurements and music |
 
-## Música
-Composiciones originales en estilo chiptune, sintetizadas con `herramientas/gen_musica.py` (ondas cuadradas y triangulares,
-ruido para la percusión; requiere `numpy`, `scipy` y `ffmpeg` con libvorbis). Cada pista dura 16 compases y se repite sin cortes.
+### Adjusting the difficulty
 
-| Pista | Dónde suena | Tonalidad / tempo |
+Every difficulty setting is in the **AJUSTES** section of `MotorJuego`:
+
+| Constants | Effect |
+|---|---|
+| `VELOCIDADES`, `SEGUNDOS_POR_NIVEL` | Speeds and how often they increase |
+| `VELOCIDAD_SALTO`, `GRAVEDAD` | Jump strength and gravity |
+| `GAP_*` | Space between obstacles |
+| `TIPOS`, `PESOS` | Obstacle types and their probability |
+| `VIDAS_INICIALES`, `SEGUNDOS_INVULNERABLE` | Lives and invulnerability time |
+| `PUNTOS_POR_ESQUIVE`, `COSTO_PISTA` | Scoring and hint cost |
+
+## Project structure
+
+```text
+app/                      Android module
+  src/main/java/          game classes
+  src/main/res/           layouts, images, audio, icons and values
+herramientas/             Python scripts that generate the art and music
+  fuentes/                source image for the logo
+docs/capturas/            screenshots
+pruebas/                  simulation tests (plain Java)
+correr_pruebas.sh         compiles and runs the tests
+```
+
+## Art and music
+
+The scenery is pixel art (1 art pixel = 1 dp), and the music is original chiptune synthesized in code from square and triangle waves and noise. To regenerate the assets:
+
+```bash
+pip install pillow numpy scipy    # the music also needs ffmpeg with libvorbis
+```
+
+| Script in `herramientas/` | Generates |
+|---|---|
+| `gen_pixel.py` | Sky, moon, clouds, trees, bushes, books and hearts |
+| `gen_piso.py` | Grass and dirt, in three palettes |
+| `gen_logo.py` | Game logo |
+| `gen_icono.py` | Adaptive and classic launcher icons |
+| `gen_musica.py` | Music tracks |
+
+| Track | Plays during | Key and tempo |
 |---|---|---|
-| `musica_menu` | menú, créditos y cómo jugar | Do mayor, 88 bpm |
-| `musica_dia` | partida, velocidad 1 | Do mayor, 126 bpm |
-| `musica_atardecer` | partida, velocidad 2 | Sol mayor, 108 bpm |
-| `musica_noche` | partida, velocidad 3 | Re menor, 140 bpm |
-| `musica_fin` | fin de partida | La menor, 76 bpm |
+| `musica_menu` | Menu, credits and instructions | C major, 88 bpm |
+| `musica_dia` | Gameplay, day | C major, 126 bpm |
+| `musica_atardecer` | Gameplay, sunset | G major, 108 bpm |
+| `musica_noche` | Gameplay, night | D minor, 140 bpm |
+| `musica_fin` | Game over | A minor, 76 bpm |
 
-## Licencia
-El código se distribuye bajo la licencia [MIT](LICENSE).
+Each track is 16 bars long and loops seamlessly.
 
-## Créditos
-Todo el código, el arte, la música y los efectos de sonido son originales de este proyecto.
+## License
+
+The code is released under the [MIT License](LICENSE).
+
+## Credits
+
+All code, art, music and sound effects are original to this project.
